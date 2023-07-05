@@ -48,8 +48,12 @@ function singleNumberBit(nums: number[]): number {
       // Update using derived equations
       seenOnce = (seenOnce ^ num) & (~seenTwice);
       seenTwice = (seenTwice ^ num) & (~seenOnce);
+      console.log(`once ${seenOnce}`);
+      console.log(`twise ${seenTwice}`);
   }
 
   // Return integer which appears exactly once
   return seenOnce;
 };
+
+console.log(singleNumberBit([0,1,0,1,98,0,1,99,98, 98]));
