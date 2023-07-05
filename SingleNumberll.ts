@@ -48,12 +48,29 @@ function singleNumberBit(nums: number[]): number {
       // Update using derived equations
       seenOnce = (seenOnce ^ num) & (~seenTwice);
       seenTwice = (seenTwice ^ num) & (~seenOnce);
-      console.log(`once ${seenOnce}`);
-      console.log(`twise ${seenTwice}`);
   }
 
   // Return integer which appears exactly once
   return seenOnce;
 };
 
-console.log(singleNumberBit([0,1,0,1,98,0,1,99,98, 98]));
+// ex 2, 2, 3, 2 = 3
+const simpleBit = (nums: number[]) => {
+  let one = 0;
+  let two = 0;
+  let three = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    const ts = ~three;
+    two ^= one & nums[i];
+    one ^= nums[i];
+    three = one & two;
+    one &= ~three;
+    two &= ~three;
+  }
+  return one;
+}
+
+console.log(singleNumberBit([0,1,0,1,98,0,1,99,98,98]));
+// console.log(simpleBit([0,1,0,1,98,0,1,99,98,98]));
+console.log(simpleBit([2,2,3,2]));
